@@ -1,60 +1,157 @@
-/* Dopamine molecule wireframe — catechol ring + ethylamine chain as SVG */
+/* Dopamine molecule wireframe with animated electron particles flowing along bonds */
 "use client";
 
+import { useEffect, useRef } from "react";
+
+/** Bond segment defined by start and end coordinates */
+interface Bond {
+  x1: number; y1: number;
+  x2: number; y2: number;
+}
+
+const BONDS: Bond[] = [
+  /* Benzene ring */
+  { x1: 160, y1: 60, x2: 200, y2: 83 },
+  { x1: 200, y1: 83, x2: 200, y2: 130 },
+  { x1: 200, y1: 130, x2: 160, y2: 153 },
+  { x1: 160, y1: 153, x2: 120, y2: 130 },
+  { x1: 120, y1: 130, x2: 120, y2: 83 },
+  { x1: 120, y1: 83, x2: 160, y2: 60 },
+  /* OH groups */
+  { x1: 120, y1: 83, x2: 80, y2: 60 },
+  { x1: 120, y1: 130, x2: 80, y2: 153 },
+  /* Ethylamine chain */
+  { x1: 200, y1: 83, x2: 240, y2: 60 },
+  { x1: 240, y1: 60, x2: 280, y2: 83 },
+  { x1: 280, y1: 83, x2: 280, y2: 110 },
+];
+
+const PARTICLE_COUNT = 8;
+const PARTICLE_SPEED = 0.004;
+const VIEW_WIDTH = 320;
+const VIEW_HEIGHT = 260;
+
 /**
- * Renders the dopamine (3,4-dihydroxyphenethylamine) molecular structure
- * as a clean wireframe SVG. Atoms at vertices, bonds as lines.
- * Matches the classic skeletal formula: benzene ring, two -OH groups, side chain ending in -NH₂.
+ * Dopamine (3,4-dihydroxyphenethylamine) skeletal formula with
+ * animated particles traveling along bonds like electron flow.
  */
 export default function DopamineMolecule({ className = "" }: { className?: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const frameRef = useRef<number>(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+      bondIdx: Math.floor(Math.random() * BONDS.length),
+      t: Math.random(),
+      speed: PARTICLE_SPEED + Math.random() * 0.003,
+    }));
+
+    const draw = () => {
+      ctx.clearRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
+
+      /* Draw bonds */
+      drawBonds(ctx);
+      /* Draw double bonds */
+      drawDoubleBonds(ctx);
+      /* Draw labels */
+      drawLabels(ctx);
+      /* Draw particles */
+      drawParticles(ctx, particles);
+
+      /* Advance particles */
+      advanceParticles(particles);
+
+      frameRef.current = requestAnimationFrame(draw);
+    };
+
+    frameRef.current = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(frameRef.current);
+  }, []);
+
   return (
-    <svg
-      viewBox="0 0 320 260"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <canvas
+      ref={canvasRef}
+      width={VIEW_WIDTH}
+      height={VIEW_HEIGHT}
       className={className}
       aria-label="Dopamine molecular structure"
-    >
-      {/* Benzene ring — hexagonal arrangement */}
-      {/* C1 (top-right) */}
-      {/* C2 (right) */}
-      {/* C3 (bottom-right) */}
-      {/* C4 (bottom-left) */}
-      {/* C5 (left) */}
-      {/* C6 (top-left) */}
-
-      {/* Ring bonds */}
-      <line x1="160" y1="60" x2="200" y2="83" stroke="white" strokeWidth="2" />
-      <line x1="200" y1="83" x2="200" y2="130" stroke="white" strokeWidth="2" />
-      <line x1="200" y1="130" x2="160" y2="153" stroke="white" strokeWidth="2" />
-      <line x1="160" y1="153" x2="120" y2="130" stroke="white" strokeWidth="2" />
-      <line x1="120" y1="130" x2="120" y2="83" stroke="white" strokeWidth="2" />
-      <line x1="120" y1="83" x2="160" y2="60" stroke="white" strokeWidth="2" />
-
-      {/* Double bonds (inner) — C1=C2, C3=C4, C5=C6 */}
-      <line x1="163" y1="68" x2="195" y2="87" stroke="white" strokeWidth="1.2" opacity="0.5" />
-      <line x1="195" y1="126" x2="163" y2="145" stroke="white" strokeWidth="1.2" opacity="0.5" />
-      <line x1="125" y1="126" x2="125" y2="87" stroke="white" strokeWidth="1.2" opacity="0.5" />
-
-      {/* OH group on C5 (left, upper) — meta position */}
-      <line x1="120" y1="83" x2="80" y2="60" stroke="white" strokeWidth="2" />
-      <text x="52" y="56" fill="white" fontSize="18" fontFamily="var(--font-mono)">HO</text>
-
-      {/* OH group on C4 (bottom-left) — para position */}
-      <line x1="120" y1="130" x2="80" y2="153" stroke="white" strokeWidth="2" />
-      <text x="52" y="160" fill="white" fontSize="18" fontFamily="var(--font-mono)">HO</text>
-
-      {/* Ethylamine side chain from C1 (top-right) */}
-      {/* C1 → Cα */}
-      <line x1="200" y1="83" x2="240" y2="60" stroke="white" strokeWidth="2" />
-      {/* Cα → Cβ */}
-      <line x1="240" y1="60" x2="280" y2="83" stroke="white" strokeWidth="2" />
-      {/* Cβ → NH₂ */}
-      <line x1="280" y1="83" x2="280" y2="110" stroke="white" strokeWidth="2" />
-
-      {/* NH₂ label */}
-      <text x="268" y="130" fill="white" fontSize="18" fontFamily="var(--font-mono)">NH</text>
-      <text x="296" y="136" fill="white" fontSize="12" fontFamily="var(--font-mono)">2</text>
-    </svg>
+    />
   );
+}
+
+/** Render all bond lines */
+function drawBonds(ctx: CanvasRenderingContext2D) {
+  ctx.strokeStyle = "rgba(255,255,255,0.85)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (const b of BONDS) {
+    ctx.moveTo(b.x1, b.y1);
+    ctx.lineTo(b.x2, b.y2);
+  }
+  ctx.stroke();
+}
+
+/** Render inner double-bond lines for aromaticity */
+function drawDoubleBonds(ctx: CanvasRenderingContext2D) {
+  ctx.strokeStyle = "rgba(255,255,255,0.35)";
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(163, 68);  ctx.lineTo(195, 87);
+  ctx.moveTo(195, 126); ctx.lineTo(163, 145);
+  ctx.moveTo(125, 126); ctx.lineTo(125, 87);
+  ctx.stroke();
+}
+
+/** Render atom labels (HO, NH₂) */
+function drawLabels(ctx: CanvasRenderingContext2D) {
+  ctx.fillStyle = "white";
+  ctx.font = "18px monospace";
+  ctx.fillText("HO", 52, 56);
+  ctx.fillText("HO", 52, 160);
+  ctx.fillText("NH", 268, 130);
+  ctx.font = "12px monospace";
+  ctx.fillText("2", 296, 136);
+}
+
+/** Render glowing particles at their current positions */
+function drawParticles(
+  ctx: CanvasRenderingContext2D,
+  particles: { bondIdx: number; t: number }[],
+) {
+  for (const p of particles) {
+    const bond = BONDS[p.bondIdx];
+    const x = bond.x1 + (bond.x2 - bond.x1) * p.t;
+    const y = bond.y1 + (bond.y2 - bond.y1) * p.t;
+
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, 6);
+    grad.addColorStop(0, "rgba(37,99,235,0.9)");
+    grad.addColorStop(1, "rgba(37,99,235,0)");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "rgba(37,99,235,0.95)";
+    ctx.beginPath();
+    ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+/** Move particles forward, wrapping to a new random bond at the end */
+function advanceParticles(
+  particles: { bondIdx: number; t: number; speed: number }[],
+) {
+  for (const p of particles) {
+    p.t += p.speed;
+    if (p.t >= 1) {
+      p.t = 0;
+      p.bondIdx = Math.floor(Math.random() * BONDS.length);
+    }
+  }
 }
