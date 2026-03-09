@@ -55,14 +55,18 @@ export default function SerotoninMolecule({ className = "" }: { className?: stri
       speed: PARTICLE_SPEED + Math.random() * 0.003,
     }));
 
+    let tick = 0;
+
     const draw = () => {
       ctx.clearRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
 
       drawBonds(ctx);
       drawDoubleBonds(ctx);
+      drawVertexGlow(ctx, tick);
       drawLabels(ctx);
       drawParticles(ctx, particles);
       advanceParticles(particles);
+      tick++;
 
       frameRef.current = requestAnimationFrame(draw);
     };
@@ -80,6 +84,30 @@ export default function SerotoninMolecule({ className = "" }: { className?: stri
       aria-label="Serotonin molecular structure"
     />
   );
+}
+
+/** Unique vertex positions extracted from bond endpoints */
+const VERTICES = Array.from(
+  new Set(BONDS.flatMap((b) => [`${b.x1},${b.y1}`, `${b.x2},${b.y2}`])),
+).map((s) => {
+  const [x, y] = s.split(",").map(Number);
+  return { x, y };
+});
+
+/** Subtle pulsing glow at each bond vertex — breathing effect */
+function drawVertexGlow(ctx: CanvasRenderingContext2D, tick: number) {
+  for (let i = 0; i < VERTICES.length; i++) {
+    const v = VERTICES[i];
+    const pulse = 0.3 + 0.7 * Math.sin(tick * 0.02 + i * 1.2) ** 2;
+    const radius = 3 + pulse * 2;
+    const grad = ctx.createRadialGradient(v.x, v.y, 0, v.x, v.y, radius);
+    grad.addColorStop(0, `rgba(234,88,12,${0.25 * pulse})`);
+    grad.addColorStop(1, "rgba(234,88,12,0)");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(v.x, v.y, radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
 }
 
 /** Render all bond lines */

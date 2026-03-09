@@ -439,6 +439,32 @@ input, textarea {
   transform: translateX(100%);
 }
 
+/* ═══════ DATA TICKER — infinite horizontal scroll ═══════ */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-scroll {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+/* ═══════ CTA BREATHING PULSE — subtle opacity pulse on card call-to-action ═══════ */
+@keyframes cta-breathe {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 0.7; }
+  100% { opacity: 0.4; }
+}
+
+.cta-breathe {
+  animation: cta-breathe 3s ease-in-out infinite;
+}
+
+.group:hover .cta-breathe {
+  animation: none;
+  opacity: 1;
+}
+
 /* ═══════ LOGO ENTRANCE — letter-spacing expands on load ═══════ */
 @keyframes logo-expand {
   0%   { letter-spacing: 0em; opacity: 0; filter: blur(8px); }

@@ -22,6 +22,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import ApiStatus from "@/components/ApiStatus";
+import DataTicker from "@/components/DataTicker";
 
 const INQUIRY_TYPES = [
   { value: "agency", label: "Agency Services" },
@@ -100,11 +101,14 @@ function IntroSection() {
   );
 }
 
-/** Pulsing vertical connector line from cards to contact */
+/** Telemetry ticker + vertical connector line bridging cards to contact */
 function ContactConnector() {
   return (
     <StaggeredEntrance delay={CONTACT_DELAY - 200} direction="none">
-      <div className="contact-connector my-8 md:my-12" />
+      <div className="my-8 md:my-12">
+        <DataTicker />
+        <div className="contact-connector mt-6" />
+      </div>
     </StaggeredEntrance>
   );
 }
@@ -164,7 +168,7 @@ function DopamineCard() {
             </div>
 
             <p
-              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
+              className="cta-breathe mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
               style={{ fontFamily: "var(--font-mono)" }}
             >
               Click to learn more about our process →
@@ -252,7 +256,7 @@ function SerotoninCard() {
             </div>
 
             <p
-              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
+              className="cta-breathe mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
               style={{ fontFamily: "var(--font-mono)" }}
             >
               Click to learn more about our software →
