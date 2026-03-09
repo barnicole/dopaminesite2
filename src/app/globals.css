@@ -232,6 +232,83 @@ input:focus, textarea:focus, select:focus {
 .accent-blue:hover { border-top-color: rgba(37,99,235,0.8); }
 .accent-orange:hover { border-top-color: rgba(234,88,12,0.8); }
 
+/* ═══════ BORDER TRACE — animated laser line around card perimeter on hover ═══════ */
+@keyframes border-trace-blue {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 400% 0%; }
+}
+
+@keyframes border-trace-orange {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 400% 0%; }
+}
+
+.border-trace-blue {
+  position: relative;
+}
+
+.border-trace-blue::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(37,99,235,0.6) 45%,
+    rgba(37,99,235,0.9) 50%,
+    rgba(37,99,235,0.6) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  background-size: 400% 100%;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.group:hover .border-trace-blue::after {
+  opacity: 1;
+  animation: border-trace-blue 2s linear infinite;
+}
+
+.border-trace-orange {
+  position: relative;
+}
+
+.border-trace-orange::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(234,88,12,0.6) 45%,
+    rgba(234,88,12,0.9) 50%,
+    rgba(234,88,12,0.6) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  background-size: 400% 100%;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.group:hover .border-trace-orange::after {
+  opacity: 1;
+  animation: border-trace-orange 2s linear infinite;
+}
+
 /* ═══════ TABLE GLITCH — gentle ambient distortion on product section ═══════ */
 @keyframes table-glitch-shift {
   0%    { transform: translate(0, 0); }
@@ -360,6 +437,33 @@ input, textarea {
 
 .hud-submit:hover::before {
   transform: translateX(100%);
+}
+
+/* ═══════ LOGO ENTRANCE — letter-spacing expands on load ═══════ */
+@keyframes logo-expand {
+  0%   { letter-spacing: 0em; opacity: 0; filter: blur(8px); }
+  60%  { filter: blur(0px); }
+  100% { letter-spacing: 0.25em; opacity: 1; filter: blur(0px); }
+}
+
+.logo-entrance {
+  animation: logo-expand 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+/* ═══════ DIALOG MODAL — cyberpunk scan lines and accent border ═══════ */
+.dialog-cyberpunk {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  box-shadow:
+    0 0 60px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(255,255,255,0.008) 3px,
+    rgba(255,255,255,0.008) 4px
+  );
 }
 
 @layer base {

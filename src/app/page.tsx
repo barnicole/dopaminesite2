@@ -1,7 +1,7 @@
-/* Single centered page — logo, typewriter intro, molecule cards, contact form */
+/* Single centered page — cyberpunk HUD, animated molecules, typewriter intro */
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, useRef, type FormEvent } from "react";
 import DopamineMolecule from "@/components/DopamineMolecule";
 import SerotoninMolecule from "@/components/SerotoninMolecule";
 import DnaHelix from "@/components/DnaHelix";
@@ -11,6 +11,8 @@ import Typewriter from "@/components/Typewriter";
 import ScanLine from "@/components/ScanLine";
 import DataFragments from "@/components/DataFragments";
 import HudFrame from "@/components/HudFrame";
+import NoiseOverlay from "@/components/NoiseOverlay";
+import TiltCard from "@/components/TiltCard";
 import {
   Dialog,
   DialogTrigger,
@@ -41,7 +43,7 @@ const CONTACT_DELAY = 2400;
 const FOOTER_DELAY = 2800;
 
 /**
- * One-page centered layout with interactive lattice background,
+ * One-page centered layout with interactive lattice, HUD overlays,
  * staggered entrance animations, and canvas-based molecule particles.
  */
 export default function Home() {
@@ -51,6 +53,7 @@ export default function Home() {
       <ScanLine />
       <HudFrame />
       <DataFragments />
+      <NoiseOverlay />
       <ApiStatus />
 
       <div className="relative z-10 flex flex-col items-center px-6 py-12 md:py-20">
@@ -67,19 +70,17 @@ export default function Home() {
   );
 }
 
-/** Centered logo — fades in first */
+/** Centered logo — letter-spacing expands on load */
 function LogoSection() {
   return (
-    <StaggeredEntrance delay={LOGO_DELAY} direction="none">
-      <div className="text-center mb-6">
-        <h1
-          className="text-2xl md:text-4xl tracking-[0.25em] font-normal"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          DOPAMINE
-        </h1>
-      </div>
-    </StaggeredEntrance>
+    <div className="text-center mb-6">
+      <h1
+        className="logo-entrance text-2xl md:text-4xl font-normal"
+        style={{ fontFamily: "var(--font-heading)" }}
+      >
+        DOPAMINE
+      </h1>
+    </div>
   );
 }
 
@@ -99,7 +100,7 @@ function IntroSection() {
   );
 }
 
-/** Vertical connector line from cards to contact section */
+/** Pulsing vertical connector line from cards to contact */
 function ContactConnector() {
   return (
     <StaggeredEntrance delay={CONTACT_DELAY - 200} direction="none">
@@ -108,12 +109,14 @@ function ContactConnector() {
   );
 }
 
-/** Two molecule cards + DNA helix bridge — slides up with blur-to-sharp */
+/** Two molecule cards + DNA helix bridge with parallax tilt */
 function ProductCards() {
   return (
     <StaggeredEntrance delay={CARDS_DELAY}>
       <div className="product-table-glitch flex flex-col md:flex-row items-stretch gap-0">
-        <DopamineCard />
+        <TiltCard className="flex-1">
+          <DopamineCard />
+        </TiltCard>
 
         {/* Desktop DNA helix bridge */}
         <div className="hidden md:flex items-center justify-center w-14">
@@ -125,18 +128,20 @@ function ProductCards() {
           <DnaHelix className="h-full w-12 rotate-90" />
         </div>
 
-        <SerotoninCard />
+        <TiltCard className="flex-1">
+          <SerotoninCard />
+        </TiltCard>
       </div>
     </StaggeredEntrance>
   );
 }
 
-/** Dopamine agency card — blue accent, glitch text, click opens modal */
+/** Dopamine agency card — blue accent, border trace, glitch text */
 function DopamineCard() {
   return (
     <Dialog>
-      <DialogTrigger className="group relative flex-1 cursor-pointer text-left">
-        <div className="relative glow-blue accent-blue card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
+      <DialogTrigger className="group relative w-full cursor-pointer text-left">
+        <div className="relative glow-blue accent-blue border-trace-blue card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
           <div className="absolute inset-0 bg-gradient-to-b from-dopamine-blue/5 to-transparent pointer-events-none" />
 
           <div className="relative z-10">
@@ -173,11 +178,11 @@ function DopamineCard() {
   );
 }
 
-/** Dopamine modal content — extracted for readability */
+/** Dopamine modal — cyberpunk scan line overlay */
 function DopamineModal() {
   return (
     <DialogContent
-      className="sm:max-w-lg bg-bg border-border-line text-fg"
+      className="dialog-cyberpunk sm:max-w-lg bg-bg border-border-line text-fg"
       style={{ fontFamily: "var(--font-body)" }}
     >
       <DialogHeader>
@@ -219,12 +224,12 @@ function DopamineModal() {
   );
 }
 
-/** Serotonin software card — orange accent, glitch text, click opens modal */
+/** Serotonin card — orange accent, border trace, glitch text */
 function SerotoninCard() {
   return (
     <Dialog>
-      <DialogTrigger className="group relative flex-1 cursor-pointer text-left">
-        <div className="relative glow-orange accent-orange card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
+      <DialogTrigger className="group relative w-full cursor-pointer text-left">
+        <div className="relative glow-orange accent-orange border-trace-orange card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
           <div className="absolute inset-0 bg-gradient-to-b from-serotonin-orange/5 to-transparent pointer-events-none" />
 
           <div className="relative z-10">
@@ -261,11 +266,11 @@ function SerotoninCard() {
   );
 }
 
-/** Serotonin modal content — extracted for readability */
+/** Serotonin modal — cyberpunk scan line overlay */
 function SerotoninModal() {
   return (
     <DialogContent
-      className="sm:max-w-lg bg-bg border-border-line text-fg"
+      className="dialog-cyberpunk sm:max-w-lg bg-bg border-border-line text-fg"
       style={{ fontFamily: "var(--font-body)" }}
     >
       <DialogHeader>
@@ -308,10 +313,23 @@ function SerotoninModal() {
   );
 }
 
-/** Contact form with heading glow and staggered entrance */
+/** Contact form with scroll-triggered reveal */
 function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.2 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -335,81 +353,88 @@ function ContactSection() {
           className="text-sm tracking-[0.2em] uppercase text-muted-text"
           style={{ fontFamily: "var(--font-mono)" }}
         >
-          Message received. We will be in touch.
+          Transmission received. We will be in touch.
         </p>
       </div>
     );
   }
 
   return (
-    <StaggeredEntrance delay={CONTACT_DELAY}>
-      <div id="contact" className="max-w-lg mx-auto">
-        <h2
-          className="contact-heading-glow text-xl md:text-2xl tracking-[0.15em] font-normal text-center mb-10"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          CONTACT
-        </h2>
+    <div
+      ref={sectionRef}
+      id="contact"
+      className="max-w-lg mx-auto"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transition: "opacity 0.8s ease, transform 0.8s ease",
+      }}
+    >
+      <h2
+        className="contact-heading-glow text-xl md:text-2xl tracking-[0.15em] font-normal text-center mb-10"
+        style={{ fontFamily: "var(--font-heading)" }}
+      >
+        CONTACT
+      </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {error && (
-            <p
-              className="text-xs text-muted-text border border-border-line p-3"
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              Please fill in all required fields.
-            </p>
-          )}
-
-          <div className="flex gap-3 flex-wrap">
-            {INQUIRY_TYPES.map((type) => (
-              <label key={type.value} className="cursor-pointer">
-                <input
-                  type="radio"
-                  name="inquiry"
-                  value={type.value}
-                  defaultChecked={type.value === "agency"}
-                  className="sr-only peer"
-                />
-                <span
-                  className="block border border-border-line px-4 py-2 text-[10px] tracking-[0.15em] uppercase text-muted-text peer-checked:border-fg peer-checked:text-fg transition-colors"
-                  style={{ fontFamily: "var(--font-mono)" }}
-                >
-                  {type.label}
-                </span>
-              </label>
-            ))}
-          </div>
-
-          <FormField label="Name *" name="name" type="text" required />
-          <FormField label="Company" name="company" type="text" />
-          <FormField label="Email *" name="email" type="email" required />
-
-          <div>
-            <label
-              className="block text-[10px] tracking-[0.2em] uppercase text-muted-text mb-2"
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              Message
-            </label>
-            <textarea
-              name="message"
-              rows={3}
-              className="w-full bg-transparent border border-border-line px-4 py-3 text-xs text-fg placeholder:text-muted-text/30 resize-none transition-colors"
-              style={{ fontFamily: "var(--font-body)" }}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="hud-submit w-full border border-fg py-3 text-[10px] tracking-[0.3em] uppercase hover:bg-fg hover:text-bg transition-colors duration-200"
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {error && (
+          <p
+            className="text-xs text-muted-text border border-border-line p-3"
             style={{ fontFamily: "var(--font-mono)" }}
           >
-            Transmit
-          </button>
-        </form>
-      </div>
-    </StaggeredEntrance>
+            Please fill in all required fields.
+          </p>
+        )}
+
+        <div className="flex gap-3 flex-wrap">
+          {INQUIRY_TYPES.map((type) => (
+            <label key={type.value} className="cursor-pointer">
+              <input
+                type="radio"
+                name="inquiry"
+                value={type.value}
+                defaultChecked={type.value === "agency"}
+                className="sr-only peer"
+              />
+              <span
+                className="block border border-border-line px-4 py-2 text-[10px] tracking-[0.15em] uppercase text-muted-text peer-checked:border-fg peer-checked:text-fg transition-colors"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                {type.label}
+              </span>
+            </label>
+          ))}
+        </div>
+
+        <FormField label="Name *" name="name" type="text" required />
+        <FormField label="Company" name="company" type="text" />
+        <FormField label="Email *" name="email" type="email" required />
+
+        <div>
+          <label
+            className="block text-[10px] tracking-[0.2em] uppercase text-muted-text mb-2"
+            style={{ fontFamily: "var(--font-mono)" }}
+          >
+            Message
+          </label>
+          <textarea
+            name="message"
+            rows={3}
+            className="w-full bg-transparent border border-border-line px-4 py-3 text-xs text-fg placeholder:text-muted-text/30 resize-none transition-colors"
+            style={{ fontFamily: "var(--font-body)" }}
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="hud-submit w-full border border-fg py-3 text-[10px] tracking-[0.3em] uppercase hover:bg-fg hover:text-bg transition-colors duration-200"
+          style={{ fontFamily: "var(--font-mono)" }}
+        >
+          Transmit
+        </button>
+      </form>
+    </div>
   );
 }
 
