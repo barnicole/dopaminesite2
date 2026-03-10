@@ -4,12 +4,12 @@
 import { useEffect, useRef, useCallback } from "react";
 
 const GRID_SIZE = 40;
-const DOT_RADIUS = 1;
-const LINE_ALPHA = 0.04;
-const DOT_ALPHA = 0.1;
-const GLOW_RADIUS = 200;
-const GLOW_BOOST_DOT = 0.5;
-const GLOW_BOOST_LINE = 0.15;
+const DOT_RADIUS = 1.2;
+const LINE_ALPHA = 0.08;
+const DOT_ALPHA = 0.2;
+const GLOW_RADIUS = 260;
+const GLOW_BOOST_DOT = 0.8;
+const GLOW_BOOST_LINE = 0.3;
 
 /**
  * Canvas-based lattice replacing the CSS background.
@@ -147,7 +147,7 @@ function drawDots(
 function drawGlow(ctx: CanvasRenderingContext2D, mx: number, my: number) {
   if (mx < -500) return;
   const grad = ctx.createRadialGradient(mx, my, 0, mx, my, GLOW_RADIUS);
-  grad.addColorStop(0, "rgba(255,255,255,0.03)");
+  grad.addColorStop(0, "rgba(255,255,255,0.07)");
   grad.addColorStop(1, "rgba(255,255,255,0)");
   ctx.fillStyle = grad;
   ctx.beginPath();

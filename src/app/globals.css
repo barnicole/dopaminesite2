@@ -205,17 +205,6 @@ input:focus, textarea:focus, select:focus {
 
 .glow-orange:hover::before { opacity: 1; }
 
-/* ═══════ CARD ACCENT LINES — colored top border for identity at rest ═══════ */
-.accent-blue {
-  border-top: 2px solid rgba(37,99,235,0.4);
-}
-
-.accent-orange {
-  border-top: 2px solid rgba(234,88,12,0.4);
-}
-
-.accent-blue:hover { border-top-color: rgba(37,99,235,0.8); }
-.accent-orange:hover { border-top-color: rgba(234,88,12,0.8); }
 
 /* ═══════ FORM BASE — clean caret styling ═══════ */
 input, textarea {
@@ -232,6 +221,15 @@ input, textarea {
 .logo-entrance {
   animation: logo-expand 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   opacity: 0;
+}
+
+/* ═══════ DIAMOND CARDS — rotated square with readable content ═══════ */
+.diamond-frame {
+  transform: rotate(45deg);
+}
+
+.diamond-content {
+  transform: rotate(-45deg);
 }
 
 @layer base {

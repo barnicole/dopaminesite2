@@ -92,24 +92,24 @@ function Divider() {
   return <hr className="border-border-line my-14 md:my-20" />;
 }
 
-/** Two molecule cards + DNA helix bridge with parallax tilt */
+/** Two diamond cards + DNA helix bridge with parallax tilt */
 function ProductCards() {
   return (
     <StaggeredEntrance delay={CARDS_DELAY}>
-      <div className="flex flex-col md:flex-row items-stretch gap-0">
-        <TiltCard className="flex-1">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0 py-8">
+        <TiltCard>
           <DopamineCard />
         </TiltCard>
 
-        <div className="hidden md:flex items-center justify-center w-14">
-          <DnaHelix className="w-full h-full" />
+        <div className="hidden md:flex items-center justify-center w-10 -mx-6 z-10">
+          <DnaHelix className="w-full h-[300px]" />
         </div>
 
-        <div className="md:hidden flex justify-center h-16">
-          <DnaHelix className="h-full w-12 rotate-90" />
+        <div className="md:hidden flex justify-center h-10 -my-2 z-10">
+          <DnaHelix className="h-full w-10 rotate-90" />
         </div>
 
-        <TiltCard className="flex-1">
+        <TiltCard>
           <SerotoninCard />
         </TiltCard>
       </div>
@@ -117,37 +117,37 @@ function ProductCards() {
   );
 }
 
-/** Dopamine agency card — clean, blue accent top */
+/** Dopamine agency card — diamond (rotated square) with blue accent */
 function DopamineCard() {
   return (
     <Dialog>
-      <DialogTrigger className="group relative w-full cursor-pointer text-left">
-        <div className="relative accent-blue glow-blue card-emboss p-10 md:p-12 flex flex-col h-full">
-          <div className="relative z-10">
-            <h2
-              className="glitch-text text-lg md:text-xl tracking-[0.2em] font-normal mb-1"
-              data-text="DOPAMINE"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              DOPAMINE
-            </h2>
-            <p
-              className="text-[10px] tracking-[0.3em] text-muted-text uppercase mb-8"
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              The Agency
-            </p>
+      <DialogTrigger className="group relative cursor-pointer">
+        <div className="diamond-frame w-[240px] h-[240px] md:w-[300px] md:h-[300px]">
+          <div className="relative w-full h-full glow-blue card-emboss border border-white/10 bg-white/[0.02] overflow-hidden">
+            <div className="diamond-content absolute inset-0 flex flex-col items-center justify-center text-center">
+              <h2
+                className="glitch-text text-base md:text-lg tracking-[0.2em] font-normal mb-0.5"
+                data-text="DOPAMINE"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                DOPAMINE
+              </h2>
+              <p
+                className="text-[9px] tracking-[0.3em] text-muted-text uppercase mb-3 md:mb-4"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                The Agency
+              </p>
 
-            <div className="flex items-center justify-center py-4">
-              <DopamineMolecule className="w-full max-w-[300px] h-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+              <DopamineMolecule className="w-[120px] md:w-[150px] h-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <p
+                className="mt-3 md:mt-4 text-[9px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                Learn more →
+              </p>
             </div>
-
-            <p
-              className="mt-8 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              Learn more →
-            </p>
           </div>
         </div>
       </DialogTrigger>
@@ -200,37 +200,37 @@ function DopamineModal() {
   );
 }
 
-/** Serotonin card — clean, orange accent top */
+/** Serotonin card — diamond (rotated square) with orange accent */
 function SerotoninCard() {
   return (
     <Dialog>
-      <DialogTrigger className="group relative w-full cursor-pointer text-left">
-        <div className="relative accent-orange glow-orange card-emboss p-10 md:p-12 flex flex-col h-full">
-          <div className="relative z-10">
-            <h2
-              className="glitch-text text-lg md:text-xl tracking-[0.2em] font-normal mb-1"
-              data-text="SEROTONIN"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              SEROTONIN
-            </h2>
-            <p
-              className="text-[10px] tracking-[0.3em] text-muted-text uppercase mb-8"
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              The Software
-            </p>
+      <DialogTrigger className="group relative cursor-pointer">
+        <div className="diamond-frame w-[240px] h-[240px] md:w-[300px] md:h-[300px]">
+          <div className="relative w-full h-full glow-orange card-emboss border border-white/10 bg-white/[0.02] overflow-hidden">
+            <div className="diamond-content absolute inset-0 flex flex-col items-center justify-center text-center">
+              <h2
+                className="glitch-text text-base md:text-lg tracking-[0.2em] font-normal mb-0.5"
+                data-text="SEROTONIN"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                SEROTONIN
+              </h2>
+              <p
+                className="text-[9px] tracking-[0.3em] text-muted-text uppercase mb-3 md:mb-4"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                The Software
+              </p>
 
-            <div className="flex items-center justify-center py-4">
-              <SerotoninMolecule className="w-full max-w-[300px] h-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+              <SerotoninMolecule className="w-[120px] md:w-[150px] h-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <p
+                className="mt-3 md:mt-4 text-[9px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                Learn more →
+              </p>
             </div>
-
-            <p
-              className="mt-8 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              Learn more →
-            </p>
           </div>
         </div>
       </DialogTrigger>
