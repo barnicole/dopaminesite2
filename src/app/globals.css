@@ -1,242 +1,53 @@
-/* Dopamine website — minimal dark technical aesthetic with shadcn */
+/* Global styles — NU Speculative Corporate design system. */
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-
-@custom-variant dark (&:is(.dark *));
-
-@font-face {
-  font-family: 'Alliance';
-  src: url('/alliance.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 
 :root {
-  --bg: #000000;
-  --fg: #ffffff;
-  --muted-text: #555555;
-  --border-line: #1a1a1a;
-  --surface: #080808;
-  --dopamine-blue: #2563eb;
-  --serotonin-orange: #ea580c;
-  --font-heading: 'Alliance', 'Helvetica Neue', sans-serif;
-  --font-mono: var(--font-geist-mono), 'SF Mono', 'Consolas', monospace;
-  --font-body: var(--font-sans), system-ui, sans-serif;
+  /* Frame */
+  --frame-bg: #0A0A0A;
+  --panel-bg: #EBEBEB;
+  --mark-color: #666666;
 
-  --background: #000000;
-  --foreground: #ffffff;
-  --card: #0a0a0a;
-  --card-foreground: #ffffff;
-  --popover: #0a0a0a;
-  --popover-foreground: #ffffff;
-  --primary: #ffffff;
-  --primary-foreground: #000000;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #ffffff;
-  --muted: #1a1a1a;
-  --muted-foreground: #555555;
-  --accent: #1a1a1a;
-  --accent-foreground: #ffffff;
-  --destructive: #dc2626;
-  --border: rgba(255 255 255 / 0.08);
-  --input: rgba(255 255 255 / 0.1);
-  --ring: #555555;
-  --radius: 0rem;
+  /* Accent — one color, nothing else */
+  --accent: #FF1F6B;
+  --accent-glow: rgba(255, 31, 107, 0.12);
+
+  /* Text on light panels */
+  --text-primary: #0A0A0A;
+  --text-secondary: #444444;
+  --text-muted: #666666;
+
+  /* Text on dark frame */
+  --frame-text: #666666;
+  --frame-text-emphasis: #EBEBEB;
+
+  /* Borders */
+  --border-hairline: rgba(0, 0, 0, 0.08);
+  --border-rule: rgba(0, 0, 0, 0.12);
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-fg: var(--fg);
-  --color-muted-text: var(--muted-text);
-  --color-border-line: var(--border-line);
-  --color-surface: var(--surface);
-  --color-dopamine-blue: var(--dopamine-blue);
-  --color-serotonin-orange: var(--serotonin-orange);
-  --font-sans: var(--font-sans);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --radius-sm: 0rem;
-  --radius-md: 0rem;
-  --radius-lg: 0rem;
-  --radius-xl: 0rem;
+  --color-background: var(--frame-bg);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-grotesk);
+  --font-mono: var(--font-spacemono);
+  --font-display: var(--font-bebas);
 }
 
-html { scroll-behavior: smooth; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-body);
+  background: var(--frame-bg);
+  color: var(--text-primary);
+  font-family: var(--font-grotesk), system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: var(--fg);
-  color: var(--bg);
-}
-
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border-line); }
-
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--fg) !important;
-}
-
-/* ═══════ GLITCH TEXT — triggers on hover, runs 2s then holds ═══════ */
-@keyframes glitch-skew {
-  0%   { transform: skew(0deg); }
-  10%  { transform: skew(-2deg); }
-  20%  { transform: skew(0.5deg); }
-  30%  { transform: skew(-1deg); }
-  40%  { transform: skew(0deg); }
-  100% { transform: skew(0deg); }
-}
-
-@keyframes glitch-clip-1 {
-  0%   { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 2px); }
-  10%  { clip-path: inset(50% 0 10% 0); transform: translate(3px, -1px); }
-  20%  { clip-path: inset(10% 0 70% 0); transform: translate(-2px, 1px); }
-  30%  { clip-path: inset(40% 0 30% 0); transform: translate(2px, -2px); }
-  40%  { clip-path: inset(0 0 100% 0); transform: translate(0); }
-  100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
-}
-
-@keyframes glitch-clip-2 {
-  0%   { clip-path: inset(60% 0 10% 0); transform: translate(3px, -1px); }
-  10%  { clip-path: inset(10% 0 60% 0); transform: translate(-3px, 2px); }
-  20%  { clip-path: inset(70% 0 5% 0); transform: translate(2px, 1px); }
-  30%  { clip-path: inset(30% 0 40% 0); transform: translate(-1px, -2px); }
-  40%  { clip-path: inset(0 0 100% 0); transform: translate(0); }
-  100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
-}
-
-.glitch-text {
-  position: relative;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.glitch-text::before { color: var(--dopamine-blue); }
-.glitch-text::after { color: var(--serotonin-orange); }
-
-.group:hover .glitch-text::before {
-  opacity: 0.8;
-  animation: glitch-clip-1 2s steps(2, end) forwards;
-}
-
-.group:hover .glitch-text::after {
-  opacity: 0.8;
-  animation: glitch-clip-2 2s steps(2, end) forwards;
-}
-
-.group:hover .glitch-text {
-  animation: glitch-skew 2s ease forwards;
-}
-
-/* ═══════ EMBOSS — card push-in on hover ═══════ */
-.card-emboss {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, box-shadow;
-}
-
-.card-emboss:hover {
-  transform: scale(0.985) translateY(2px);
-  box-shadow: inset 0 2px 20px rgba(255,255,255,0.03);
-}
-
-/* ═══════ GLOW ACCENTS — behind cards ═══════ */
-.glow-blue::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: radial-gradient(ellipse at center, rgba(37,99,235,0.15) 0%, transparent 70%);
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.glow-blue:hover::before { opacity: 1; }
-
-.glow-orange::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: radial-gradient(ellipse at center, rgba(234,88,12,0.15) 0%, transparent 70%);
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.glow-orange:hover::before { opacity: 1; }
-
-
-/* ═══════ FORM BASE — clean caret styling ═══════ */
-input, textarea {
-  caret-color: var(--fg);
-}
-
-/* ═══════ LOGO ENTRANCE — letter-spacing expands on load ═══════ */
-@keyframes logo-expand {
-  0%   { letter-spacing: 0em; opacity: 0; filter: blur(8px); }
-  60%  { filter: blur(0px); }
-  100% { letter-spacing: 0.25em; opacity: 1; filter: blur(0px); }
-}
-
-.logo-entrance {
-  animation: logo-expand 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  opacity: 0;
-}
-
-/* ═══════ DIAMOND CARDS — rotated square with readable content ═══════ */
-.diamond-frame {
-  transform: rotate(45deg);
-}
-
-.diamond-content {
-  transform: rotate(-45deg);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  background: var(--accent);
+  color: #fff;
 }
