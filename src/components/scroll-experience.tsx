@@ -7,7 +7,7 @@ import {
   SITE_NAME, VALUE_CARDS, ACCENT, PANEL_BG, FRAME_BG, MARK_COLOR,
 } from "@/lib/constants";
 
-const BG_VIDEO_SRC = "/assets/placeholder.mp4";
+const BG_VIDEO_SRC = "/assets/hand-1.mp4";
 const MAX_NAME_LENGTH = 100;
 const MAX_EMAIL_LENGTH = 254;
 const MAX_MESSAGE_LENGTH = 2000;
