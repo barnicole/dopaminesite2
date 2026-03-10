@@ -1,4 +1,4 @@
-/* Single centered page — cyberpunk HUD, animated molecules, typewriter intro */
+/* Single centered page — clean, precise, typographic */
 "use client";
 
 import { useState, useEffect, useRef, type FormEvent } from "react";
@@ -8,10 +8,6 @@ import DnaHelix from "@/components/DnaHelix";
 import LatticeCanvas from "@/components/LatticeCanvas";
 import StaggeredEntrance from "@/components/StaggeredEntrance";
 import Typewriter from "@/components/Typewriter";
-import ScanLine from "@/components/ScanLine";
-import DataFragments from "@/components/DataFragments";
-import HudFrame from "@/components/HudFrame";
-import NoiseOverlay from "@/components/NoiseOverlay";
 import TiltCard from "@/components/TiltCard";
 import {
   Dialog,
@@ -22,7 +18,6 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import ApiStatus from "@/components/ApiStatus";
-import DataTicker from "@/components/DataTicker";
 
 const INQUIRY_TYPES = [
   { value: "agency", label: "Agency Services" },
@@ -36,33 +31,27 @@ const INTRO_TEXT =
   "design — with proprietary AI tooling to deliver production-grade " +
   "marketing materials at speed and scale. Two products, one ecosystem.";
 
-/* Entrance timing constants (ms) */
 const LOGO_DELAY = 200;
 const INTRO_DELAY = 800;
 const CARDS_DELAY = 1800;
-const CONTACT_DELAY = 2400;
 const FOOTER_DELAY = 2800;
 
 /**
- * One-page centered layout with interactive lattice, HUD overlays,
- * staggered entrance animations, and canvas-based molecule particles.
+ * One-page centered layout — reactive lattice, animated molecules,
+ * staggered entrance. Clean typographic hierarchy, no decorative noise.
  */
 export default function Home() {
   return (
     <div className="relative min-h-screen">
       <LatticeCanvas />
-      <ScanLine />
-      <HudFrame />
-      <DataFragments />
-      <NoiseOverlay />
       <ApiStatus />
 
-      <div className="relative z-10 flex flex-col items-center px-6 py-12 md:py-20">
+      <div className="relative z-10 flex flex-col items-center px-6 py-16 md:py-24">
         <div className="w-full max-w-4xl">
           <LogoSection />
           <IntroSection />
           <ProductCards />
-          <ContactConnector />
+          <Divider />
           <ContactSection />
           <FooterLine />
         </div>
@@ -74,7 +63,7 @@ export default function Home() {
 /** Centered logo — letter-spacing expands on load */
 function LogoSection() {
   return (
-    <div className="text-center mb-6">
+    <div className="text-center mb-8">
       <h1
         className="logo-entrance text-2xl md:text-4xl font-normal"
         style={{ fontFamily: "var(--font-heading)" }}
@@ -89,7 +78,7 @@ function LogoSection() {
 function IntroSection() {
   return (
     <StaggeredEntrance delay={INTRO_DELAY - 200} direction="none">
-      <div className="max-w-xl mx-auto text-center mb-10">
+      <div className="max-w-xl mx-auto text-center mb-14">
         <p
           className="text-xs md:text-sm leading-relaxed text-muted-text"
           style={{ fontFamily: "var(--font-body)" }}
@@ -101,33 +90,24 @@ function IntroSection() {
   );
 }
 
-/** Telemetry ticker + vertical connector line bridging cards to contact */
-function ContactConnector() {
-  return (
-    <StaggeredEntrance delay={CONTACT_DELAY - 200} direction="none">
-      <div className="my-8 md:my-12">
-        <DataTicker />
-        <div className="contact-connector mt-6" />
-      </div>
-    </StaggeredEntrance>
-  );
+/** Thin rule */
+function Divider() {
+  return <hr className="border-border-line my-14 md:my-20" />;
 }
 
 /** Two molecule cards + DNA helix bridge with parallax tilt */
 function ProductCards() {
   return (
     <StaggeredEntrance delay={CARDS_DELAY}>
-      <div className="product-table-glitch flex flex-col md:flex-row items-stretch gap-0">
+      <div className="flex flex-col md:flex-row items-stretch gap-0">
         <TiltCard className="flex-1">
           <DopamineCard />
         </TiltCard>
 
-        {/* Desktop DNA helix bridge */}
         <div className="hidden md:flex items-center justify-center w-14">
           <DnaHelix className="w-full h-full" />
         </div>
 
-        {/* Mobile DNA helix bridge */}
         <div className="md:hidden flex justify-center h-16">
           <DnaHelix className="h-full w-12 rotate-90" />
         </div>
@@ -140,14 +120,12 @@ function ProductCards() {
   );
 }
 
-/** Dopamine agency card — blue accent, border trace, glitch text */
+/** Dopamine agency card — clean, blue accent top */
 function DopamineCard() {
   return (
     <Dialog>
       <DialogTrigger className="group relative w-full cursor-pointer text-left">
-        <div className="relative glow-blue accent-blue border-trace-blue card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
-          <div className="absolute inset-0 bg-gradient-to-b from-dopamine-blue/5 to-transparent pointer-events-none" />
-
+        <div className="relative accent-blue glow-blue card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
           <div className="relative z-10">
             <h2
               className="glitch-text text-xl md:text-2xl tracking-[0.15em] font-normal mb-1"
@@ -168,10 +146,10 @@ function DopamineCard() {
             </div>
 
             <p
-              className="cta-breathe mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
+              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
               style={{ fontFamily: "var(--font-mono)" }}
             >
-              Click to learn more about our process →
+              Learn more →
             </p>
           </div>
         </div>
@@ -182,11 +160,11 @@ function DopamineCard() {
   );
 }
 
-/** Dopamine modal — cyberpunk scan line overlay */
+/** Dopamine modal — clean, no overlays */
 function DopamineModal() {
   return (
     <DialogContent
-      className="dialog-cyberpunk sm:max-w-lg bg-bg border-border-line text-fg"
+      className="sm:max-w-lg bg-bg border-border-line text-fg"
       style={{ fontFamily: "var(--font-body)" }}
     >
       <DialogHeader>
@@ -228,14 +206,12 @@ function DopamineModal() {
   );
 }
 
-/** Serotonin card — orange accent, border trace, glitch text */
+/** Serotonin card — clean, orange accent top */
 function SerotoninCard() {
   return (
     <Dialog>
       <DialogTrigger className="group relative w-full cursor-pointer text-left">
-        <div className="relative glow-orange accent-orange border-trace-orange card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
-          <div className="absolute inset-0 bg-gradient-to-b from-serotonin-orange/5 to-transparent pointer-events-none" />
-
+        <div className="relative accent-orange glow-orange card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
           <div className="relative z-10">
             <h2
               className="glitch-text text-xl md:text-2xl tracking-[0.15em] font-normal mb-1"
@@ -256,10 +232,10 @@ function SerotoninCard() {
             </div>
 
             <p
-              className="cta-breathe mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
+              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
               style={{ fontFamily: "var(--font-mono)" }}
             >
-              Click to learn more about our software →
+              Learn more →
             </p>
           </div>
         </div>
@@ -270,11 +246,11 @@ function SerotoninCard() {
   );
 }
 
-/** Serotonin modal — cyberpunk scan line overlay */
+/** Serotonin modal — clean, no overlays */
 function SerotoninModal() {
   return (
     <DialogContent
-      className="dialog-cyberpunk sm:max-w-lg bg-bg border-border-line text-fg"
+      className="sm:max-w-lg bg-bg border-border-line text-fg"
       style={{ fontFamily: "var(--font-body)" }}
     >
       <DialogHeader>
@@ -357,7 +333,7 @@ function ContactSection() {
           className="text-sm tracking-[0.2em] uppercase text-muted-text"
           style={{ fontFamily: "var(--font-mono)" }}
         >
-          Transmission received. We will be in touch.
+          Message received. We will be in touch.
         </p>
       </div>
     );
@@ -370,12 +346,12 @@ function ContactSection() {
       className="max-w-lg mx-auto"
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transform: visible ? "translateY(0)" : "translateY(16px)",
         transition: "opacity 0.8s ease, transform 0.8s ease",
       }}
     >
       <h2
-        className="contact-heading-glow text-xl md:text-2xl tracking-[0.15em] font-normal text-center mb-10"
+        className="text-xl md:text-2xl tracking-[0.15em] font-normal text-center mb-10"
         style={{ fontFamily: "var(--font-heading)" }}
       >
         CONTACT
@@ -432,17 +408,17 @@ function ContactSection() {
 
         <button
           type="submit"
-          className="hud-submit w-full border border-fg py-3 text-[10px] tracking-[0.3em] uppercase hover:bg-fg hover:text-bg transition-colors duration-200"
+          className="w-full border border-fg py-3 text-[10px] tracking-[0.3em] uppercase hover:bg-fg hover:text-bg transition-colors duration-200"
           style={{ fontFamily: "var(--font-mono)" }}
         >
-          Transmit
+          Send
         </button>
       </form>
     </div>
   );
 }
 
-/** Reusable form input with consistent styling */
+/** Reusable form input */
 function FormField({
   label,
   name,
@@ -477,7 +453,7 @@ function FormField({
 function FooterLine() {
   return (
     <StaggeredEntrance delay={FOOTER_DELAY}>
-      <div className="mt-16 pt-6 border-t border-border-line text-center">
+      <div className="mt-20 pt-6 border-t border-border-line text-center">
         <p
           className="text-[9px] tracking-[0.3em] uppercase text-muted-text"
           style={{ fontFamily: "var(--font-mono)" }}
