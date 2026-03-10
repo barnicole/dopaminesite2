@@ -79,10 +79,7 @@ function IntroSection() {
   return (
     <StaggeredEntrance delay={INTRO_DELAY - 200} direction="none">
       <div className="max-w-xl mx-auto text-center mb-14">
-        <p
-          className="text-xs md:text-sm leading-relaxed text-muted-text"
-          style={{ fontFamily: "var(--font-body)" }}
-        >
+        <p className="text-xs md:text-sm leading-relaxed text-muted-text">
           <Typewriter text={INTRO_TEXT} delay={INTRO_DELAY} />
         </p>
       </div>
@@ -125,28 +122,28 @@ function DopamineCard() {
   return (
     <Dialog>
       <DialogTrigger className="group relative w-full cursor-pointer text-left">
-        <div className="relative accent-blue glow-blue card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
+        <div className="relative accent-blue glow-blue card-emboss p-10 md:p-12 flex flex-col h-full">
           <div className="relative z-10">
             <h2
-              className="glitch-text text-xl md:text-2xl tracking-[0.15em] font-normal mb-1"
+              className="glitch-text text-lg md:text-xl tracking-[0.2em] font-normal mb-1"
               data-text="DOPAMINE"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               DOPAMINE
             </h2>
             <p
-              className="text-[10px] tracking-[0.3em] text-muted-text uppercase mb-6"
+              className="text-[10px] tracking-[0.3em] text-muted-text uppercase mb-8"
               style={{ fontFamily: "var(--font-mono)" }}
             >
               The Agency
             </p>
 
-            <div className="flex items-center justify-center py-2">
-              <DopamineMolecule className="w-full max-w-[240px] h-auto opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="flex items-center justify-center py-4">
+              <DopamineMolecule className="w-full max-w-[300px] h-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
 
             <p
-              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
+              className="mt-8 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
               style={{ fontFamily: "var(--font-mono)" }}
             >
               Learn more →
@@ -163,10 +160,7 @@ function DopamineCard() {
 /** Dopamine modal — clean, no overlays */
 function DopamineModal() {
   return (
-    <DialogContent
-      className="sm:max-w-lg bg-bg border-border-line text-fg"
-      style={{ fontFamily: "var(--font-body)" }}
-    >
+    <DialogContent className="sm:max-w-lg bg-bg border-border-line text-fg">
       <DialogHeader>
         <DialogTitle
           className="text-xl tracking-[0.15em] text-fg"
@@ -211,28 +205,28 @@ function SerotoninCard() {
   return (
     <Dialog>
       <DialogTrigger className="group relative w-full cursor-pointer text-left">
-        <div className="relative accent-orange glow-orange card-emboss border border-border-line p-8 md:p-10 flex flex-col h-full bg-bg">
+        <div className="relative accent-orange glow-orange card-emboss p-10 md:p-12 flex flex-col h-full">
           <div className="relative z-10">
             <h2
-              className="glitch-text text-xl md:text-2xl tracking-[0.15em] font-normal mb-1"
+              className="glitch-text text-lg md:text-xl tracking-[0.2em] font-normal mb-1"
               data-text="SEROTONIN"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               SEROTONIN
             </h2>
             <p
-              className="text-[10px] tracking-[0.3em] text-muted-text uppercase mb-6"
+              className="text-[10px] tracking-[0.3em] text-muted-text uppercase mb-8"
               style={{ fontFamily: "var(--font-mono)" }}
             >
               The Software
             </p>
 
-            <div className="flex items-center justify-center py-2">
-              <SerotoninMolecule className="w-full max-w-[240px] h-auto opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="flex items-center justify-center py-4">
+              <SerotoninMolecule className="w-full max-w-[300px] h-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
 
             <p
-              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
+              className="mt-8 text-[10px] tracking-[0.2em] uppercase text-muted-text group-hover:text-fg transition-colors duration-500"
               style={{ fontFamily: "var(--font-mono)" }}
             >
               Learn more →
@@ -249,10 +243,7 @@ function SerotoninCard() {
 /** Serotonin modal — clean, no overlays */
 function SerotoninModal() {
   return (
-    <DialogContent
-      className="sm:max-w-lg bg-bg border-border-line text-fg"
-      style={{ fontFamily: "var(--font-body)" }}
-    >
+    <DialogContent className="sm:max-w-lg bg-bg border-border-line text-fg">
       <DialogHeader>
         <DialogTitle
           className="text-xl tracking-[0.15em] text-fg"
@@ -402,7 +393,6 @@ function ContactSection() {
             name="message"
             rows={3}
             className="w-full bg-transparent border border-border-line px-4 py-3 text-xs text-fg placeholder:text-muted-text/30 resize-none transition-colors"
-            style={{ fontFamily: "var(--font-body)" }}
           />
         </div>
 
@@ -443,7 +433,6 @@ function FormField({
         name={name}
         required={required}
         className="w-full bg-transparent border border-border-line px-4 py-3 text-xs text-fg placeholder:text-muted-text/30 transition-colors"
-        style={{ fontFamily: "var(--font-body)" }}
       />
     </div>
   );

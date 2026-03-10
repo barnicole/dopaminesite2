@@ -136,16 +136,16 @@ function drawDoubleBonds(ctx: CanvasRenderingContext2D) {
 
 /** Render atom labels (HO, NH, NH₂) */
 function drawLabels(ctx: CanvasRenderingContext2D) {
-  ctx.fillStyle = "white";
-  ctx.font = "18px monospace";
+  ctx.fillStyle = "rgba(255,255,255,0.6)";
+  ctx.font = "500 14px system-ui, -apple-system, sans-serif";
   ctx.fillText("HO", 22, 56);
-  ctx.font = "16px monospace";
+  ctx.font = "500 12px system-ui, -apple-system, sans-serif";
   ctx.fillText("N", 214, 118);
-  ctx.fillText("H", 214, 138);
-  ctx.font = "18px monospace";
+  ctx.fillText("H", 214, 136);
+  ctx.font = "500 14px system-ui, -apple-system, sans-serif";
   ctx.fillText("NH", 280, 24);
-  ctx.font = "12px monospace";
-  ctx.fillText("2", 308, 30);
+  ctx.font = "500 10px system-ui, -apple-system, sans-serif";
+  ctx.fillText("₂", 304, 28);
 }
 
 /** Render glowing particles at their current positions */

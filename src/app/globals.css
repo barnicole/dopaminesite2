@@ -13,21 +13,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'OCR-A';
-  src: url('/OCRA.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'OCR-B';
-  src: url('/ocr-b.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 
 :root {
   --bg: #000000;
@@ -38,8 +23,8 @@
   --dopamine-blue: #2563eb;
   --serotonin-orange: #ea580c;
   --font-heading: 'Alliance', 'Helvetica Neue', sans-serif;
-  --font-mono: 'OCR-A', monospace;
-  --font-body: 'OCR-B', 'OCR-A', monospace;
+  --font-mono: var(--font-geist-mono), 'SF Mono', 'Consolas', monospace;
+  --font-body: var(--font-sans), system-ui, sans-serif;
 
   --background: #000000;
   --foreground: #ffffff;
