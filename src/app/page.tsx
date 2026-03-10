@@ -123,7 +123,7 @@ function DopamineCard() {
     <Dialog>
       <DialogTrigger className="group relative cursor-pointer">
         <div className="diamond-frame w-[240px] h-[240px] md:w-[300px] md:h-[300px]">
-          <div className="relative w-full h-full glow-blue card-emboss border border-white/10 bg-white/[0.02] overflow-hidden">
+          <div className="relative w-full h-full glow-blue card-emboss border border-white/10 bg-bg overflow-hidden">
             <div className="diamond-content absolute inset-0 flex flex-col items-center justify-center text-center">
               <h2
                 className="glitch-text text-base md:text-lg tracking-[0.2em] font-normal mb-0.5"
@@ -206,7 +206,7 @@ function SerotoninCard() {
     <Dialog>
       <DialogTrigger className="group relative cursor-pointer">
         <div className="diamond-frame w-[240px] h-[240px] md:w-[300px] md:h-[300px]">
-          <div className="relative w-full h-full glow-orange card-emboss border border-white/10 bg-white/[0.02] overflow-hidden">
+          <div className="relative w-full h-full glow-orange card-emboss border border-white/10 bg-bg overflow-hidden">
             <div className="diamond-content absolute inset-0 flex flex-col items-center justify-center text-center">
               <h2
                 className="glitch-text text-base md:text-lg tracking-[0.2em] font-normal mb-0.5"
