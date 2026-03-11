@@ -18,6 +18,50 @@ export const FRAME_BG = "#0A0A0A";
 export const MARK_COLOR = "#666666";
 
 
+/* ── Layout ── */
+
+/** Flush-left padding from panel edge. */
+export const LAYOUT_PAD = "5%";
+
+/** Primary (left) column width. */
+export const LAYOUT_PRIMARY = "62%";
+
+/** Secondary (right) sidebar width. */
+export const LAYOUT_SECONDARY = "32%";
+
+/** Gap between primary and secondary columns. */
+export const LAYOUT_GAP = "6%";
+
+/** Top padding for content anchored to top of panel. */
+export const LAYOUT_TOP = "12%";
+
+/* ── Semiotic Marks ── */
+
+/** Crosshair arm length in px. */
+export const CROSSHAIR_SIZE = 24;
+
+/** Metadata block font size. */
+export const META_FONT_SIZE = "10px";
+
+/** Metadata block letter spacing. */
+export const META_TRACKING = "0.12em";
+
+/* ── Blister Card Embossed Treatment ── */
+
+/** Embossed gradient for blister-pack cards. */
+export const EMBOSSED_BG =
+  "linear-gradient(145deg, #f0f0f0 0%, #d8d8d8 50%, #c0c0c0 100%)";
+
+/** Multi-layer box-shadow for embossed depth. */
+export const EMBOSSED_SHADOW = [
+  "4px 4px 8px rgba(0,0,0,0.15)",
+  "-2px -2px 6px rgba(255,255,255,0.8)",
+  "inset 2px 2px 4px rgba(255,255,255,0.6)",
+  "inset -2px -2px 4px rgba(0,0,0,0.08)",
+].join(", ");
+
+/* ── Content ── */
+
 export const VALUE_CARDS = [
   {
     index: "01",

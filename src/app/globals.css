@@ -47,6 +47,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Hide scrollbar — user scrolls to unveil, no chrome needed. */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
 ::selection {
   background: var(--accent);
   color: #fff;
