@@ -23,7 +23,7 @@ export default function BackgroundVideo({
   const scale = useTransform(scrollProgress, [0, 1], [1, 1.15]);
 
   return (
-    <>
+    <div aria-hidden="true">
       <motion.div
         className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden will-change-transform"
         style={{ opacity, scale }}
@@ -34,6 +34,7 @@ export default function BackgroundVideo({
           loop
           muted
           playsInline
+          role="presentation"
           className="h-auto w-[160%] max-w-none"
           style={{ filter: "brightness(1.05) saturate(0.35)" }}
         />
@@ -44,6 +45,6 @@ export default function BackgroundVideo({
           background: `radial-gradient(55% 55% at 50% 50%, transparent 0%, ${PANEL_BG}66 70%, ${PANEL_BG}AA 100%)`,
         }}
       />
-    </>
+    </div>
   );
 }

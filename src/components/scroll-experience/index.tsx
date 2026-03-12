@@ -31,9 +31,9 @@ export default function ScrollExperience() {
   });
 
   return (
-    <div ref={containerRef} className="h-[650vh]">
+    <div ref={containerRef} data-scroll-container className="h-[650vh]">
       <div className="sticky top-0 h-screen">
-        <div className="relative h-full w-full overflow-hidden" style={{ background: PANEL_BG }}>
+        <div className="relative h-full w-full overflow-clip" style={{ background: PANEL_BG }}>
           <BackgroundVideo scrollProgress={scrollYProgress} />
           <ScreenHero scrollProgress={scrollYProgress} />
           <ScreenValueCards scrollProgress={scrollYProgress} />

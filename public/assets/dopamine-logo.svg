@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 784.32 180.48">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
+        fill: #111;
+      }
+
+      .cls-2 {
+        filter: url(#drop-shadow-3);
+      }
+
+      .cls-3 {
+        filter: url(#drop-shadow-2);
+      }
+
+      .cls-4 {
+        filter: url(#drop-shadow-8);
+      }
+
+      .cls-5 {
+        filter: url(#drop-shadow-6);
+      }
+
+      .cls-6 {
+        filter: url(#drop-shadow-7);
+      }
+
+      .cls-7 {
+        filter: url(#drop-shadow-5);
+      }
+
+      .cls-8 {
+        filter: url(#drop-shadow-4);
+      }
+    </style>
+    <filter id="drop-shadow-1" x="0" y="2.64" width="163.2" height="175.2" filterUnits="userSpaceOnUse">
+      <feOffset dx="3.6" dy="0"/>
+      <feGaussianBlur result="blur" stdDeviation="3.6"/>
+      <feFlood flood-color="#fff" flood-opacity=".25"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-2" x="388.32" y="6.96" width="173.52" height="173.52" filterUnits="userSpaceOnUse">
+      <feOffset dx="3.6" dy="0"/>
+      <feGaussianBlur result="blur-2" stdDeviation="3.6"/>
+      <feFlood flood-color="#fff" flood-opacity=".25"/>
+      <feComposite in2="blur-2" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-3" x="258.24" y="5.76" width="182.64" height="174.72" filterUnits="userSpaceOnUse">
+      <feOffset dx="3.6" dy="0"/>
+      <feGaussianBlur result="blur-3" stdDeviation="3.6"/>
+      <feFlood flood-color="#fff" flood-opacity=".25"/>
+      <feComposite in2="blur-3" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-4" x="205.68" y="5.28" width="143.28" height="175.2" filterUnits="userSpaceOnUse">
+      <feOffset dx="3.6" dy="0"/>
+      <feGaussianBlur result="blur-4" stdDeviation="3.6"/>
+      <feFlood flood-color="#fff" flood-opacity=".25"/>
+      <feComposite in2="blur-4" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-5" x="70.8" y="0" width="184.8" height="180.48" filterUnits="userSpaceOnUse">
+      <feOffset dx="3.6" dy="0"/>
+      <feGaussianBlur result="blur-5" stdDeviation="3.6"/>
+      <feFlood flood-color="#fff" flood-opacity=".25"/>
+      <feComposite in2="blur-5" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-6" x="647.04" y="6.96" width="137.28" height="173.52" filterUnits="userSpaceOnUse">
+      <feOffset dx="3.6" dy="0"/>
+      <feGaussianBlur result="blur-6" stdDeviation="3.6"/>
+      <feFlood flood-color="#fff" flood-opacity=".25"/>
+      <feComposite in2="blur-6" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-7" x="545.04" y="6.96" width="156.96" height="173.52" filterUnits="userSpaceOnUse">
+      <feOffset dx="3.6" dy="0"/>
+      <feGaussianBlur result="blur-7" stdDeviation="3.6"/>
+      <feFlood flood-color="#fff" flood-opacity=".25"/>
+      <feComposite in2="blur-7" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-8" x="545.04" y="6.96" width="55.2" height="173.52" filterUnits="userSpaceOnUse">
+      <feOffset dx="3.6" dy="0"/>
+      <feGaussianBlur result="blur-8" stdDeviation="3.6"/>
+      <feFlood flood-color="#fff" flood-opacity=".25"/>
+      <feComposite in2="blur-8" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Layer_2-2" data-name="Layer 2">
+    <g id="DOPAMINE">
+      <path id="D" class="cls-1" d="M7.34,13.5h59.84c48.24,0,81.57,33.11,81.57,76.3v.44c0,43.19-33.33,76.74-81.57,76.74H7.34V13.5ZM67.19,136.51c27.64,0,46.27-18.64,46.27-45.83v-.44c0-27.19-18.64-46.27-46.27-46.27h-26.08v92.53h26.08Z"/>
+      <path id="M" class="cls-3" d="M395.7,17.87h35.97l39.89,64.17,39.89-64.17h35.99v151.73h-33.18v-99.06l-42.69,64.81h-.86l-42.27-64.16v98.41h-32.72V17.87Z"/>
+      <path id="A" class="cls-2" d="M330.57,16.79h30.78l65.02,152.82h-34.89l-13.87-34.03h-64.16l-13.87,34.03h-34.03L330.57,16.79ZM365.69,106.1l-20.16-49.21-20.17,49.21h40.33Z"/>
+      <path id="P" class="cls-8" d="M213,16.13h62.7c36.62,0,58.75,21.71,58.75,53.06v.45c0,35.52-27.62,53.93-62.04,53.93h-25.65v46.04h-33.76V16.13ZM273.51,93.53c16.89,0,26.76-10.09,26.76-23.24v-.44c0-15.13-10.53-23.24-27.42-23.24h-26.08v46.93h26.74Z"/>
+      <path id="O" class="cls-7" d="M78.05,90.67v-.44c0-43.63,34.42-79.36,81.78-79.36s81.34,35.29,81.34,78.93v.44c0,43.63-34.42,79.37-81.78,79.37s-81.34-35.3-81.34-78.94ZM205.88,90.67v-.44c0-26.31-19.3-48.24-46.49-48.24s-46.04,21.49-46.04,47.8v.44c0,26.31,19.3,48.24,46.49,48.24s46.04-21.49,46.04-47.8Z"/>
+      <path id="E" class="cls-5" d="M654.24,17.87h114.44v29.7h-81.28v30.78h71.52v29.7h-71.52v31.87h82.37v29.7h-111l-4.53-5.95V17.87Z"/>
+      <polygon id="N" class="cls-6" points="687.17 17.87 654.24 17.87 654.22 17.87 654.22 111.3 583.12 17.87 552.34 17.87 552.34 169.61 585.28 169.61 585.28 73.15 658.77 169.61 687.17 169.61 687.17 47.57 687.4 47.57 687.17 17.87"/>
+      <path id="I" class="cls-4" d="M552.34,17.87h30.78l2.59,3.41v148.32h-33.38V17.87Z"/>
+    </g>
+  </g>
+</svg>

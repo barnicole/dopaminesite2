@@ -11,12 +11,12 @@ const CROSS_ARM = 16;
 /** Crosshair registration marks at all four panel corners. */
 export function RegistrationMarks() {
   return (
-    <>
+    <div aria-hidden="true" className="contents">
       <Corner isTop isLeft />
       <Corner isTop isLeft={false} />
       <Corner isTop={false} isLeft />
       <Corner isTop={false} isLeft={false} />
-    </>
+    </div>
   );
 }
 
@@ -45,12 +45,12 @@ function Corner({ isTop, isLeft }: { isTop: boolean; isLeft: boolean }) {
 /** Dark clip tabs at the mid-point of each panel edge. */
 export function FrameTabs() {
   return (
-    <>
+    <div aria-hidden="true" className="contents">
       <Tab side="top" />
       <Tab side="bottom" />
       <Tab side="left" />
       <Tab side="right" />
-    </>
+    </div>
   );
 }
 

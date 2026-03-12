@@ -3,8 +3,6 @@
 import {
   MARK_COLOR, EMBOSSED_BG, EMBOSSED_SHADOW, VALUE_CARDS,
 } from "@/lib/constants";
-import type { MetaEntry } from "@/lib/metadata";
-import MetadataBlock from "./semiotic/metadata-block";
 
 const CARD_BORDER = `1px solid ${MARK_COLOR}`;
 
@@ -12,14 +10,11 @@ const CARD_BORDER = `1px solid ${MARK_COLOR}`;
  * Industrial specimen card with embossed background and bottom-right metadata.
  * Panel-level crosshairs handle the semiotic mark system — cards stay clean.
  * @param card - Card content from VALUE_CARDS.
- * @param meta - Bottom-right corner metadata (INDEX + REV).
  */
 export default function BlisterCard({
   card,
-  meta,
 }: {
   card: (typeof VALUE_CARDS)[number];
-  meta: MetaEntry;
 }) {
   return (
     <div
@@ -32,7 +27,6 @@ export default function BlisterCard({
       }}
     >
       <CardContent card={card} />
-      <MetadataBlock data={meta} corner="bottom-right" />
     </div>
   );
 }
@@ -51,17 +45,17 @@ function CardContent({ card }: { card: (typeof VALUE_CARDS)[number] }) {
         {card.badge}
       </h3>
       <p
-        className="mt-2 text-lg font-medium"
+        className="mt-1 text-lg font-medium"
         style={{ fontFamily: "var(--font-grotesk), system-ui", color: MARK_COLOR }}
       >
         {card.title}
       </p>
       <div
-        className="mt-4 h-[2px] w-14"
+        className="mt-2 h-[2px] w-14"
         style={{ background: "var(--border-rule)" }}
       />
       <p
-        className="mt-4 max-w-[320px] text-base leading-relaxed"
+        className="mt-2 max-w-[320px] text-base leading-[1.4]"
         style={{ color: "var(--text-secondary)" }}
       >
         {card.description}
