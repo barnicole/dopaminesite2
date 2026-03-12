@@ -1,6 +1,6 @@
 /* Metadata block — monospace key-value pairs positioned in a panel corner. */
 
-import { MARK_COLOR, META_FONT_SIZE, META_TRACKING } from "@/lib/constants";
+import { MARK_COLOR, META_FONT_SIZE, META_TRACKING, LAYOUT_PAD, LAYOUT_TOP } from "@/lib/constants";
 import type { MetaEntry } from "@/lib/metadata";
 
 type Corner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
@@ -26,10 +26,11 @@ export default function MetadataBlock({
 
   return (
     <div
-      className="pointer-events-none absolute z-10"
+      aria-hidden="true"
+      className="pointer-events-none absolute z-0 hidden sm:block"
       style={{
-        [isTop ? "top" : "bottom"]: 20,
-        [isLeft ? "left" : "right"]: 20,
+        [isTop ? "top" : "bottom"]: "2%",
+        [isLeft ? "left" : "right"]: LAYOUT_PAD,
         textAlign: isLeft ? "left" : "right",
         fontFamily: "var(--font-spacemono), monospace",
         fontSize: META_FONT_SIZE,
@@ -37,6 +38,7 @@ export default function MetadataBlock({
         lineHeight: 1.6,
         color,
         textTransform: "uppercase",
+        textShadow: "0 0 8px rgba(235,235,235,0.9), 0 0 2px rgba(235,235,235,1)",
       }}
     >
       {Object.entries(data).map(([key, value]) => (

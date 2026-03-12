@@ -20,7 +20,7 @@ export function Tier2Label({
       style={{
         fontFamily: "var(--font-grotesk), system-ui",
         fontWeight: 600,
-        fontSize: "22px",
+        fontSize: "clamp(16px, 4vw, 22px)",
         letterSpacing: "0.08em",
         color: ACCENT,
       }}
@@ -46,7 +46,7 @@ export function Tier3Label({ text }: { text: string }) {
 /** Monospace index marker with accent dash (e.g. "— 01"). */
 export function IndexMarker({ index }: { index: string }) {
   return (
-    <div className="mb-5 flex items-center gap-4">
+    <div className="mb-2.5 flex items-center gap-4">
       <div className="h-[3px] w-10" style={{ background: ACCENT }} />
       <span
         className="font-mono text-[20px] font-medium tracking-widest"
@@ -59,13 +59,13 @@ export function IndexMarker({ index }: { index: string }) {
 }
 
 /** Regulatory-style fine print below section content. */
-export function Fineprint({ text }: { text: string }) {
+export function Fineprint({ text, children }: { text?: string; children?: React.ReactNode }) {
   return (
     <p
-      className="mt-8 font-mono text-[15px] leading-relaxed tracking-wide"
+      className="mt-4 font-mono text-[13px] leading-relaxed tracking-wide sm:text-[15px]"
       style={{ color: MARK_COLOR }}
     >
-      {text}
+      {children ?? text}
     </p>
   );
 }

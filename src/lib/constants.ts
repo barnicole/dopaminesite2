@@ -15,7 +15,7 @@ export const PANEL_BG = "#EBEBEB";
 export const FRAME_BG = "#0A0A0A";
 
 /** Mark color — registration marks, metadata, fine print. */
-export const MARK_COLOR = "#666666";
+export const MARK_COLOR = "#525252";
 
 
 /* ── Layout ── */

@@ -5,19 +5,21 @@
   /* Frame */
   --frame-bg: #0A0A0A;
   --panel-bg: #EBEBEB;
-  --mark-color: #666666;
+  --mark-color: #525252;
 
   /* Accent — one color, nothing else */
   --accent: #FF1F6B;
+  --accent-hover: color-mix(in srgb, var(--accent) 90%, black);
+  --accent-active: color-mix(in srgb, var(--accent) 85%, black);
   --accent-glow: rgba(255, 31, 107, 0.12);
 
   /* Text on light panels */
   --text-primary: #0A0A0A;
   --text-secondary: #444444;
-  --text-muted: #666666;
+  --text-muted: #525252;
 
   /* Text on dark frame */
-  --frame-text: #666666;
+  --frame-text: #525252;
   --frame-text-emphasis: #EBEBEB;
 
   /* Borders */
@@ -33,29 +35,57 @@
   --font-display: var(--font-bebas);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--frame-bg);
+    color: var(--text-primary);
+    font-family: var(--font-grotesk), system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Hide scrollbar — user scrolls to unveil, no chrome needed. */
+  html {
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* Accessible focus indicator — visible only on keyboard navigation. */
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Pointer cursor for interactive elements. */
+  a, button, [role="button"], input[type="submit"], input[type="button"] {
+    cursor: pointer;
+  }
 }
 
-body {
-  background: var(--frame-bg);
-  color: var(--text-primary);
-  font-family: var(--font-grotesk), system-ui, sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
+/* Respect user motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 
-/* Hide scrollbar — user scrolls to unveil, no chrome needed. */
-html {
-  scrollbar-width: none;
-}
-html::-webkit-scrollbar {
-  display: none;
-}
-
-::selection {
-  background: var(--accent);
-  color: #fff;
+  video {
+    display: none;
+  }
 }

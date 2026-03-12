@@ -56,6 +56,12 @@ export default function RootLayout({
       <body
         className={`${bebasNeue.variable} ${anton.variable} ${spaceGrotesk.variable} ${spaceMono.variable} font-sans antialiased`}
       >
+        <a
+          href="#main-content"
+          className="fixed left-4 z-[100] -top-full rounded-lg bg-[var(--frame-bg)] px-6 py-3 text-lg font-bold text-white transition-all focus:top-4"
+        >
+          Skip to content
+        </a>
         {children}
       </body>
     </html>

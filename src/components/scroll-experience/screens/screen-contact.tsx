@@ -2,11 +2,11 @@
 "use client";
 
 import { motion, useTransform, type MotionValue } from "framer-motion";
-import { MARK_COLOR, LAYOUT_PAD, LAYOUT_TOP } from "@/lib/constants";
-import { CONTACT_META_TL, CONTACT_META_BR } from "@/lib/metadata";
-import { Tier2Label } from "../typography";
+import { ACCENT, MARK_COLOR, LAYOUT_PAD, LAYOUT_TOP } from "@/lib/constants";
+import { CONTACT_META_BR } from "@/lib/metadata";
 import MetadataBlock from "../semiotic/metadata-block";
 import ContactFormCard from "../contact-form";
+import { ScrollChevronUp } from "../scroll-chevron";
 
 /**
  * Contact screen with left-aligned heading and shifted-left form card.
@@ -19,28 +19,30 @@ export default function ScreenContact({
 }) {
   const opacity = useTransform(scrollProgress, [0.77, 0.85], [0, 1]);
   const y = useTransform(scrollProgress, [0.77, 0.85], [60, 0]);
+  const pointerEvents = useTransform(opacity, (v) => (v > 0 ? "auto" : "none"));
 
   return (
-    <motion.div
+    <motion.section
+      aria-label="Contact"
       className="absolute inset-0 z-10 flex items-center will-change-[transform,opacity]"
-      style={{ opacity, y, padding: `${LAYOUT_TOP} ${LAYOUT_PAD} 8% ${LAYOUT_PAD}` }}
+      style={{ opacity, y, pointerEvents, padding: `0 ${LAYOUT_PAD}` }}
     >
-      <MetadataBlock data={CONTACT_META_TL} corner="top-left" />
       <MetadataBlock data={CONTACT_META_BR} corner="bottom-right" />
-      <div className="w-full max-w-[640px]">
-        <Tier2Label text="Contact" />
+      <div className="w-full max-w-full sm:max-w-[80%]">
         <h2
-          className="mt-3 font-display text-5xl font-bold tracking-tight text-[var(--text-primary)] sm:text-7xl"
+          className="font-display text-4xl font-bold tracking-tight text-[var(--text-primary)] sm:text-5xl"
         >
           Get in Touch
         </h2>
-        <p className="mt-4 text-xl" style={{ color: MARK_COLOR }}>
-          Tell us about your project. We&apos;ll respond within 24 hours.
+        <div className="mt-1.5 h-[3px] w-16" style={{ background: ACCENT }} />
+        <p className="mt-1.5 text-lg" style={{ color: MARK_COLOR, textShadow: "0 0 8px rgba(235,235,235,0.9), 0 0 2px rgba(235,235,235,1)" }}>
+          Tell us about your project. We&apos;ll respond within 1 business day.
         </p>
-        <div className="mt-10">
+        <div className="mt-2">
           <ContactFormCard />
         </div>
       </div>
-    </motion.div>
+      <ScrollChevronUp />
+    </motion.section>
   );
 }

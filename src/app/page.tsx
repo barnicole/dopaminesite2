@@ -7,7 +7,7 @@ import ScrollExperience from "@/components/scroll-experience";
  */
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       <ScrollExperience />
     </main>
   );

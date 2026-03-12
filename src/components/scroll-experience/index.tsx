@@ -1,7 +1,7 @@
 /* Scroll experience orchestrator — sticky full-bleed viewport with 5 screens. */
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useScroll, useSpring } from "framer-motion";
 import { PANEL_BG } from "@/lib/constants";
 import BackgroundVideo from "./background-video";
@@ -25,15 +25,65 @@ export default function ScrollExperience() {
   });
 
   const scrollYProgress = useSpring(rawProgress, {
-    stiffness: 80,
-    damping: 30,
-    restDelta: 0.0005,
+    stiffness: 160,
+    damping: 28,
+    restDelta: 0.001,
   });
 
+  /* Snap to nearest section when user stops scrolling. */
+  useEffect(() => {
+    const SNAP_POINTS = [0, 0.25, 0.45, 0.65, 0.90];
+    let debounceId: ReturnType<typeof setTimeout>;
+    let snapTimeoutId: ReturnType<typeof setTimeout>;
+    let isSnapping = false;
+
+    const snap = () => {
+      const el = containerRef.current;
+      if (!el) return;
+      const max = el.clientHeight - window.innerHeight;
+      if (max <= 0) return;
+      const frac = window.scrollY / max;
+
+      let nearest = SNAP_POINTS[0];
+      for (const p of SNAP_POINTS) {
+        if (Math.abs(frac - p) < Math.abs(frac - nearest)) nearest = p;
+      }
+      if (Math.abs(frac - nearest) < 0.01) return;
+
+      isSnapping = true;
+      window.scrollTo({ top: nearest * max, behavior: "smooth" });
+      snapTimeoutId = setTimeout(() => { isSnapping = false; }, 800);
+    };
+
+    const onScroll = () => {
+      if (isSnapping) return;
+      clearTimeout(debounceId);
+      debounceId = setTimeout(snap, 80);
+    };
+
+    const cancelSnap = () => {
+      if (isSnapping) {
+        isSnapping = false;
+        clearTimeout(snapTimeoutId);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("wheel", cancelSnap, { passive: true });
+    window.addEventListener("touchstart", cancelSnap, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("wheel", cancelSnap);
+      window.removeEventListener("touchstart", cancelSnap);
+      clearTimeout(debounceId);
+      clearTimeout(snapTimeoutId);
+    };
+  }, []);
+
   return (
-    <div ref={containerRef} className="h-[650vh]">
+    <div ref={containerRef} data-scroll-container className="h-[650vh]">
       <div className="sticky top-0 h-screen">
-        <div className="relative h-full w-full overflow-hidden" style={{ background: PANEL_BG }}>
+        <div className="relative h-full w-full overflow-clip" style={{ background: PANEL_BG }}>
           <BackgroundVideo scrollProgress={scrollYProgress} />
           <ScreenHero scrollProgress={scrollYProgress} />
           <ScreenValueCards scrollProgress={scrollYProgress} />
