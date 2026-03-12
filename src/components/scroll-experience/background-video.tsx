@@ -35,7 +35,7 @@ export default function BackgroundVideo({
           muted
           playsInline
           role="presentation"
-          className="h-auto w-[160%] max-w-none"
+          className="h-full w-full object-cover md:h-auto md:w-[160%] md:max-w-none md:object-none"
           style={{ filter: "brightness(1.05) saturate(0.35)" }}
         />
       </motion.div>

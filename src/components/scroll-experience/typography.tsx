@@ -20,7 +20,7 @@ export function Tier2Label({
       style={{
         fontFamily: "var(--font-grotesk), system-ui",
         fontWeight: 600,
-        fontSize: "22px",
+        fontSize: "clamp(16px, 4vw, 22px)",
         letterSpacing: "0.08em",
         color: ACCENT,
       }}
@@ -62,7 +62,7 @@ export function IndexMarker({ index }: { index: string }) {
 export function Fineprint({ text, children }: { text?: string; children?: React.ReactNode }) {
   return (
     <p
-      className="mt-4 font-mono text-[15px] leading-relaxed tracking-wide"
+      className="mt-4 font-mono text-[13px] leading-relaxed tracking-wide sm:text-[15px]"
       style={{ color: MARK_COLOR }}
     >
       {children ?? text}

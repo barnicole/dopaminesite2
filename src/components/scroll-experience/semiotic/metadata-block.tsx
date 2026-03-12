@@ -27,7 +27,7 @@ export default function MetadataBlock({
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute z-0"
+      className="pointer-events-none absolute z-0 hidden sm:block"
       style={{
         [isTop ? "top" : "bottom"]: "2%",
         [isLeft ? "left" : "right"]: LAYOUT_PAD,

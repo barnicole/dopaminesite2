@@ -35,12 +35,12 @@ export default function ScreenAgency({
     <motion.section
       aria-label="The Agency"
       className="absolute inset-0 z-10 flex items-center will-change-[transform,opacity]"
-      style={{ opacity, y, pointerEvents, padding: `0 ${LAYOUT_PAD}` }}
+      style={{ opacity, y, pointerEvents, padding: `0 max(${LAYOUT_PAD}, 24px)` }}
     >
       <MetadataBlock data={AGENCY_META_TR} corner="top-right" />
       <div className="flex w-full items-end">
         <AgencyPrimary />
-        <div style={{ width: LAYOUT_GAP }} />
+        <div className="hidden md:block" style={{ width: LAYOUT_GAP }} />
         <ServiceSidebar />
       </div>
       <ScrollChevronDown targetFraction={0.65} />
@@ -51,7 +51,7 @@ export default function ScreenAgency({
 /** Left column: index marker, label, giant title, description. */
 function AgencyPrimary() {
   return (
-    <div style={{ width: LAYOUT_PRIMARY }}>
+    <div className="w-full md:w-[62%]">
       <IndexMarker index="01" />
       <Tier2Label text="The Agency" />
       <h2
@@ -68,13 +68,25 @@ function AgencyPrimary() {
         {SITE_NAME}
       </h2>
       <div className="mt-1 h-[2px] w-16" style={{ background: "#000" }} />
-      <p className="mt-3 max-w-[560px] text-xl leading-[1.4] text-[var(--text-secondary)]">
+      <p className="mt-3 max-w-[560px] text-base leading-[1.4] text-[var(--text-secondary)] sm:text-xl">
         Dopamine is our agency arm — rapid prototyping and final deliverables
         using generative AI integrated into our traditional creative pipeline.
         From brand campaigns to full video productions, we use AI as an
         accelerant — not a replacement — for the craft our clients expect.
       </p>
       <Fineprint text="DPM-AG Rev.2 — For commercial licensing inquiries" />
+      {/* Mobile: inline services list */}
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 md:hidden">
+        {SERVICES.map((svc, i) => (
+          <span
+            key={svc}
+            className="font-mono text-[11px] uppercase tracking-[0.15em]"
+            style={{ color: i === 0 ? ACCENT : MARK_COLOR }}
+          >
+            {svc}
+          </span>
+        ))}
+      </div>
       <button
         onClick={() => {
           const container = document.querySelector("[data-scroll-container]");
@@ -91,7 +103,7 @@ function AgencyPrimary() {
   );
 }
 
-/** Right column: monospace service index. */
+/** Right column: monospace service index (desktop only). */
 function ServiceSidebar() {
   return (
     <div

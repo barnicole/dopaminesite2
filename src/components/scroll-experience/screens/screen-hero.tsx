@@ -25,8 +25,8 @@ export default function ScreenHero({
   return (
     <motion.section
       aria-label="Hero"
-      className="absolute inset-0 z-10 flex items-end will-change-[transform,opacity]"
-      style={{ opacity, y, pointerEvents, padding: `${LAYOUT_TOP} ${LAYOUT_PAD} 10% ${LAYOUT_PAD}` }}
+      className="absolute inset-0 z-10 flex items-end pb-[calc(10%+75px)] will-change-[transform,opacity] sm:pb-[10%]"
+      style={{ opacity, y, pointerEvents, paddingTop: LAYOUT_TOP, paddingLeft: LAYOUT_PAD, paddingRight: LAYOUT_PAD }}
     >
       <MetadataBlock data={HERO_META_TL} corner="top-left" />
       <MetadataBlock data={HERO_META_BR} corner="bottom-right" />
@@ -45,13 +45,13 @@ export default function ScreenHero({
             }}
           />
         </h1>
-        <div className="mt-1 flex items-center justify-between">
+        <div className="mt-1 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p
             className="uppercase"
             style={{
               fontFamily: "var(--font-grotesk), system-ui",
               fontWeight: 500,
-              fontSize: "24px",
+              fontSize: "clamp(14px, 4vw, 24px)",
               letterSpacing: "0.08em",
               color: MARK_COLOR,
               textShadow: "0 0 8px rgba(235,235,235,0.9), 0 0 2px rgba(235,235,235,1)",
@@ -59,6 +59,7 @@ export default function ScreenHero({
           >
             Creative AI Infrastructure
           </p>
+          <div className="order-last h-[3px] w-16 sm:hidden" style={{ background: ACCENT }} />
           <button
             onClick={() => {
               const el = document.querySelector("[aria-label='Contact']");
@@ -70,12 +71,12 @@ export default function ScreenHero({
                 }
               }
             }}
-            className="font-sans text-[16px] font-normal uppercase tracking-[0.2em] rounded-lg px-4 py-2 text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] active:bg-[var(--accent-active)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="order-last font-sans text-[16px] font-normal uppercase tracking-[0.2em] rounded-lg px-4 py-2 text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] active:bg-[var(--accent-active)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Contact Us
           </button>
         </div>
-        <div className="mt-2 h-[3px] w-16" style={{ background: ACCENT }} />
+        <div className="mt-2 hidden h-[3px] w-16 sm:block" style={{ background: ACCENT }} />
       </div>
 
       <ScrollChevronDown targetFraction={0.25} />

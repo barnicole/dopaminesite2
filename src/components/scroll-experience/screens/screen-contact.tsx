@@ -28,7 +28,7 @@ export default function ScreenContact({
       style={{ opacity, y, pointerEvents, padding: `0 ${LAYOUT_PAD}` }}
     >
       <MetadataBlock data={CONTACT_META_BR} corner="bottom-right" />
-      <div className="w-full max-w-[80%]">
+      <div className="w-full max-w-full sm:max-w-[80%]">
         <h2
           className="font-display text-4xl font-bold tracking-tight text-[var(--text-primary)] sm:text-5xl"
         >

@@ -18,12 +18,11 @@ export default function BlisterCard({
 }) {
   return (
     <div
-      className="relative flex min-h-[300px] flex-col justify-between"
+      className="relative flex min-h-[220px] flex-col justify-between p-5 sm:min-h-[300px] sm:p-8"
       style={{
         background: EMBOSSED_BG,
         boxShadow: EMBOSSED_SHADOW,
         border: CARD_BORDER,
-        padding: 32,
       }}
     >
       <CardContent card={card} />

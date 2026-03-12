@@ -35,12 +35,12 @@ export default function ScreenSerotonin({
     <motion.section
       aria-label="Serotonin Software"
       className="absolute inset-0 z-10 flex items-center will-change-[transform,opacity]"
-      style={{ opacity, y, pointerEvents, padding: `0 ${LAYOUT_PAD}` }}
+      style={{ opacity, y, pointerEvents, padding: `0 max(${LAYOUT_PAD}, 24px)` }}
     >
       <MetadataBlock data={SEROTONIN_META_TR} corner="top-right" />
       <div className="flex w-full items-end">
         <SerotoninPrimary />
-        <div style={{ width: LAYOUT_GAP }} />
+        <div className="hidden md:block" style={{ width: LAYOUT_GAP }} />
         <FeatureSidebar />
       </div>
       <ScrollChevronDown targetFraction={0.90} />
@@ -51,7 +51,7 @@ export default function ScreenSerotonin({
 /** Left column: index marker, label, giant title, description. */
 function SerotoninPrimary() {
   return (
-    <div style={{ width: LAYOUT_PRIMARY }}>
+    <div className="w-full md:w-[62%]">
       <IndexMarker index="02" />
       <Tier2Label text="The Software" />
       <h2
@@ -67,7 +67,7 @@ function SerotoninPrimary() {
         Serotonin
       </h2>
       <div className="mt-1 h-[2px] w-16" style={{ background: "#000" }} />
-      <p className="mt-3 max-w-[560px] text-xl leading-[1.4] text-[var(--text-secondary)]">
+      <p className="mt-3 max-w-[560px] text-base leading-[1.4] text-[var(--text-secondary)] sm:text-xl">
         Seats-based access to the same AI pipeline we use internally,
         purpose-built so clients can create their own marketing material
         in-house. Every workspace is fully siloed — your brand kits, assets,
@@ -75,6 +75,18 @@ function SerotoninPrimary() {
         guardrails an enterprise actually needs.
       </p>
       <Fineprint text="SRT-SW Rev.4 — Enterprise licensing available. All workspaces E2E encrypted." />
+      {/* Mobile: inline features list */}
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 md:hidden">
+        {FEATURES.map((feat, i) => (
+          <span
+            key={feat}
+            className="font-mono text-[11px] uppercase tracking-[0.15em]"
+            style={{ color: i === 0 ? ACCENT : MARK_COLOR }}
+          >
+            {feat}
+          </span>
+        ))}
+      </div>
       <button
         onClick={() => {
           const container = document.querySelector("[data-scroll-container]");

@@ -19,9 +19,8 @@ export default function ContactFormCard() {
 
   return (
     <div
-      className="overflow-hidden"
+      className="overflow-hidden p-5 sm:p-8"
       style={{
-        padding: "32px 32px",
         background: EMBOSSED_BG,
         boxShadow: EMBOSSED_SHADOW,
         border: `1px solid ${MARK_COLOR}`,
